@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>book-service</name>
 	<description>Demo project for Spring Boot</description>
+
 	<properties>
 		<sonar.organization>arjun-zemoso</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -81,17 +82,27 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.10</version>
 				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
 					<execution>
 						<id>report</id>
 						<goals>
-							<goal>report-aggregate</goal>
+							<goal>report</goal>
 						</goals>
-						<phase>verify</phase>
+						<configuration>
+							<formats>
+								<format>XML</format>
+							</formats>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
