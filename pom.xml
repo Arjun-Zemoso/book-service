@@ -19,6 +19,7 @@
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<spring-cloud.version>2021.0.7</spring-cloud.version>
 		<java.version>11</java.version>
+		<sonar.exclusions>**/BookServiceApp*.java</sonar.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
