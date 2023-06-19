@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,19 +59,28 @@ class BookServiceImplTest {
 
     @Test
     void testGetBooksFromOrder() {
-        // Mock data
         List<Long> booksOrder = new ArrayList<>();
         booksOrder.add(1L);
         List<BookDto> bookDtoList = new ArrayList<>();
         bookDtoList.add(new BookDto());
-        when(bookRepository.getById(1L)).thenReturn(new Book());
+
+        Book book = Book.builder()
+                .id(1L)
+                .name("Sample Book")
+                .author("Sample Author")
+                .price(BigDecimal.valueOf(19.99))
+                .description("Sample Description")
+                .coverSource("Sample Cover Source")
+                .build();
+
+        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
 
         // Perform the method under test
         List<BookDto> result = bookService.getBooksFromOrder(booksOrder);
 
         // Verify the result
         assertEquals(bookDtoList.size(), result.size());
-        verify(bookRepository, times(1)).getById(1L);
+        verify(bookRepository, times(1)).findById(1L);
     }
 
     @Test
