@@ -35,7 +35,15 @@ public class BookController {
         return bookService.getBooksFromOrder(idList);
     }
     @PutMapping
-    public void updateBook(@RequestBody Book book){
+    public void updateBook(@RequestBody BookDto bookDto){
+        Book book= Book.builder()
+                .id(bookDto.getId())
+                .price(bookDto.getPrice())
+                .name(bookDto.getName())
+                .description(bookDto.getDescription())
+                .coverSource(bookDto.getCoverSource())
+                .author(bookDto.getAuthor())
+                .build();
         bookService.updateBook(book);
     }
 

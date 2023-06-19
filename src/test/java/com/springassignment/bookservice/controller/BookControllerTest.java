@@ -89,12 +89,12 @@ import static org.mockito.Mockito.*;
     @Test
     void testUpdateBook() {
         // Mock data
-        Book book = new Book();
+        BookDto bookDto = new BookDto();
 
         // Perform the PUT request
-        bookController.updateBook(book);
+        bookController.updateBook(bookDto);
 
         // Verify that the bookService.updateBook method is called once
-        verify(bookService, times(1)).updateBook(book);
+        verify(bookService, times(1)).updateBook(any());
     }
 }
