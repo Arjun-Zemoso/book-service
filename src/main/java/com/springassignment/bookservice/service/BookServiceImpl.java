@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,7 +25,8 @@ public class BookServiceImpl implements BookService{
     }
 
     public Book getBookById(Long id){
-        return bookRepository.getById(id);
+       Optional <Book> book= bookRepository.findById(id);
+       return book.orElse(null);
     }
 
     @Override
@@ -44,7 +44,6 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public List<BookDto> getBooksFromOrder(List<Long> booksOrder) {
-        List<BookDto> bookDtoList = new ArrayList<>();
         return booksOrder.stream()
                 .map(id->mapToBookDto(getBookById(id)))
                 .collect(Collectors.toList());
